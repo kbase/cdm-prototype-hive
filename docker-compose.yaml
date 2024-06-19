@@ -1,0 +1,36 @@
+version: '3'
+
+# This docker-compose is for developer convenience, not for running in production.
+
+services:
+
+  postgres:
+    image: postgres:16.3
+    restart: always
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=hive
+      - POSTGRES_PASSWORD=hivepassword
+      - POSTGRES_DB=hive
+      
+  hive-metastore-server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: hive-metastore-server
+    ports:
+      - 9083:9083
+    depends_on:
+      - postgres
+    environment:
+      # Set to true after DB has been created on first run
+      # This is really annoying...
+      - IS_RESUME=false
+      - POSTGRES_HOST=postgres:5432
+      - POSTGRES_DB=hive
+      - POSTGRES_USER=hive
+      - POSTGRES_PASSWORD=hivepassword
+    volumes:
+      - ./cdr/cdm/hive/data/warehouse:/opt/hive/data/warehouse
