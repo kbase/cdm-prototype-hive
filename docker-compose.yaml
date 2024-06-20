@@ -28,6 +28,7 @@ services:
       # Set to true after DB has been created on first run
       # This is really annoying...
       - IS_RESUME=false
+      - VERBOSE=false
       - POSTGRES_HOST=postgres:5432
       - POSTGRES_DB=hive
       - POSTGRES_USER=hive

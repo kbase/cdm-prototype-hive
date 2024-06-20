@@ -11,6 +11,10 @@ RUN apt-get update; \
 RUN rm /opt/hadoop/share/hadoop/common/lib/log4j-1.2.17.jar && \
     rm /opt/hadoop/share/hadoop/hdfs/lib/log4j-1.2.17.jar
 
+# Allow providing arguments to schematool by appending an env var to the line
+# This is fragile and may need updating as the hive version changes
+RUN sed -i -r 's#^(.*schematool.*)$#\1 \$SCHEMATOOL_ARGS#' /entrypoint.sh
+
 ENV POSTGRES_JAR=postgresql-42.6.2.jar
 
 # License is BSD-2: https://jdbc.postgresql.org/license/
