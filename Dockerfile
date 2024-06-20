@@ -7,6 +7,10 @@ RUN apt-get update; \
     apt-get -y install curl; \
     rm -rf /var/lib/apt/lists/*
 
+# Remove log4j jars with cve-2021-4104 in the hadoop installation
+RUN rm /opt/hadoop/share/hadoop/common/lib/log4j-1.2.17.jar && \
+    rm /opt/hadoop/share/hadoop/hdfs/lib/log4j-1.2.17.jar
+
 ENV POSTGRES_JAR=postgresql-42.6.2.jar
 
 # License is BSD-2: https://jdbc.postgresql.org/license/
