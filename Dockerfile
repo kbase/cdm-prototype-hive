@@ -1,4 +1,4 @@
-FROM apache/hive:3.1.3
+FROM apache/hive:4.0.0
 
 # https://github.com/apache/hive/blob/7f87a3b0ef5bd468df34fb4dd5bb4c4db2ac2245/packaging/src/docker/Dockerfile
 
