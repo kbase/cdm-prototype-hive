@@ -11,5 +11,10 @@ export SERVICE_OPTS="
     -Djavax.jdo.option.ConnectionUserName=$POSTGRES_USER
     -Djavax.jdo.option.ConnectionPassword=$POSTGRES_PASSWORD"
 
+if [ "$VERBOSE" = "true" ]; then
+    echo "Setting verbose mode"
+    export SCHEMATOOL_ARGS="--verbose"
+fi
+
 # https://github.com/apache/hive/blob/7f87a3b0ef5bd468df34fb4dd5bb4c4db2ac2245/packaging/src/docker/Dockerfile
 /entrypoint.sh
